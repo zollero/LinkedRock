@@ -13,8 +13,18 @@
 	var Ling = function () {
 		return true;
 	}
-
+	//版本
 	Ling.version = "1.0.0";
 
+	//配置
+	Ling.config = {
+
+	}
+
+	Ling.fn = Ling.prototype = {
+		init: function(){
+			
+		}
+	};
 
 })();
