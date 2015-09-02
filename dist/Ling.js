@@ -24,6 +24,12 @@
 	Ling.prototype = {
 		init: function(){
 		
+		},
+		move: function(){
+			
+		},
+		destory: function(){
+			
 		}
 	};
 
