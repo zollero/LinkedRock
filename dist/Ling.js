@@ -21,9 +21,9 @@
 
 	}
 
-	Ling.fn = Ling.prototype = {
+	Ling.prototype = {
 		init: function(){
-			
+		
 		}
 	};
 
