@@ -7,11 +7,6 @@
 
 var Ling = (function (window, document) {
 
-	// console.log(window);
-	// console.log(document);
-	
-	
-
 	/**
 	 * Ling Object
 	 */
