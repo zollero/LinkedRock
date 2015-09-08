@@ -11,18 +11,7 @@ var Ling = (function (window, document) {
 	 */
 	Ling = function (element, options) {
 		this.moveArea = typeof element == "string" ? document.querySelector(element) : element;
-		this.options = {
-			text: [{
-				name: "世界"
-			},{
-				name: "中国"
-			},{
-				name: "美国"
-			},{
-				name: "俄罗斯"
-			}],
-			numberOfLines: 5
-		};
+		this.options = options;
 
 		this.moveArea.style.position = "absolute";
 		this.moveArea.style.width = "100%";
