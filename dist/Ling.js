@@ -1,15 +1,15 @@
 /**
- * Ling  框架文件
+ * LinkdRock  1.0.0
  *
  */
 
 'use strict';
-var Ling = (function (window, document) {
+var LinkdRock = (function (window, document) {
 
 	/**
-	 * Ling Object
+	 * LinkdRock Object
 	 */
-	Ling = function (element, options) {
+	LinkdRock = function (element, options) {
 		this.moveArea = typeof element == "string" ? document.querySelector(element) : element;
 		this.options = options;
 
@@ -19,6 +19,8 @@ var Ling = (function (window, document) {
 		this.moveArea.style.left = "0";
 
 		// 初始化页面中显示的拖动条数
+		if (typeof(this.options.text) == "undefined" && this.options.text.length == 0) 
+			throw new Error("The text must be not null!");
 		for (var i = 0; i < this.options.text.length; i++) {
 			var div = document.createElement("div");
 			div.id = "moveArea-div-child";
@@ -33,11 +35,11 @@ var Ling = (function (window, document) {
 	}
 	
 	//版本
-	Ling.version = "1.0.0";
+	LinkdRock.version = "1.0.0";
 
 	var dragObj, newBlank;
 
-	var _touchStart = Ling._touchStart = function(e) {
+	var _touchStart = LinkdRock._touchStart = function(e) {
 		e = e || event;
 		e.preventDefault();
 		dragObj = this;
@@ -54,14 +56,14 @@ var Ling = (function (window, document) {
 		dragObj.parentNode.insertBefore(newBlank, dragObj);
 		return false;
 	}
-	var _touchMove = Ling._touchMove = function(e) {
+	var _touchMove = LinkdRock._touchMove = function(e) {
 		e = e || event;
 		e.preventDefault();
 		if (!dragObj) return false;
 		dragObj.style.top = (e.touches[0].clientY - dragObj.offsetHeight/2) + "px";
 		moveBlankDiv(e);
 	}
-	var _touchEnd = Ling._touchEnd = function(e) {
+	var _touchEnd = LinkdRock._touchEnd = function(e) {
 		e = e || event;
 		if (!dragObj) return false;
 		dragObj.parentNode.insertBefore(dragObj, newBlank);
@@ -73,7 +75,7 @@ var Ling = (function (window, document) {
 		dragObj = {};
 	}
 
-	var moveBlankDiv = Ling.moveBlankDiv = function(e) {
+	var moveBlankDiv = LinkdRock.moveBlankDiv = function(e) {
 		var blocks = document.querySelectorAll("#moveArea-div-child");
 		for (var i = 0; i < blocks.length; i++) {
 			if (blocks[i] == dragObj) continue;
@@ -83,7 +85,7 @@ var Ling = (function (window, document) {
 			else if (moveMark == 1) 
 				blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
 			else {
-				if (blocks[i].nextElementSibling == null) 
+				if (blocks[i].nextElementSibLinkdRock == null) 
 					blocks[i].parentNode.appendChild(newBlank);
 				else
 					blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
@@ -92,7 +94,7 @@ var Ling = (function (window, document) {
 		};
 	}
 
-	var upOrDown = Ling.upOrDown = function(o, e) {
+	var upOrDown = LinkdRock.upOrDown = function(o, e) {
 		var xy = getXY(o);
 		if (e.touches[0].clientY > xy.topSet && e.touches[0].clientY < (xy.topSet + xy.heightSet)) {
 		    if (e.touches[0].clientY < (xy.topSet + xy.heightSet / 2))
@@ -103,7 +105,7 @@ var Ling = (function (window, document) {
 		    return 0; //NO MOVEING
 	}
 
-	var getXY = Ling.getXY = function(e) {
+	var getXY = LinkdRock.getXY = function(e) {
 		var a = new Array();
 	    a.topSet = e.offsetTop; 
 	    a.widthSet = e.offsetWidth;
@@ -114,6 +116,6 @@ var Ling = (function (window, document) {
 	    return a;
 	}
 
-	return Ling;
+	return LinkdRock;
 
 })(window, document);
