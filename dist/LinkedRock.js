@@ -1,13 +1,16 @@
 /**
- * LinkedRock  1.0.0
+ * LinkedRock  v1.0.0
  *
  */
 
-'use strict';
+"use strict";
+
+
 var LinkedRock = (function (window, document) {
 
 	/**
-	 * LinkedRock Object
+	 * @param {DOM element}
+	 * @param {properties}
 	 */
 	LinkedRock = function (element, options) {
 		this.moveArea = typeof element == "string" ? document.querySelector(element) : element;
@@ -18,9 +21,12 @@ var LinkedRock = (function (window, document) {
 		this.moveArea.style.height = "100%";
 		this.moveArea.style.left = "0";
 
-		// 初始化页面中显示的拖动条数
 		if (typeof(this.options.text) == "undefined" && this.options.text.length == 0) 
 			throw new Error("The text must be not null!");
+
+		/**
+		 * Init the moving lines on the page
+		 */
 		for (var i = 0; i < this.options.text.length; i++) {
 			var div = document.createElement("div");
 			div.id = "moveArea-div-child";
@@ -34,11 +40,14 @@ var LinkedRock = (function (window, document) {
 		};
 	}
 	
-	//版本
+	//The version
 	LinkedRock.version = "1.0.0";
 
 	var dragObj, newBlank;
 
+	/**
+	 * Define the event functions
+	 */
 	var _touchStart = LinkedRock._touchStart = function(e) {
 		e = e || event;
 		e.preventDefault();
@@ -75,6 +84,11 @@ var LinkedRock = (function (window, document) {
 		dragObj = {};
 	}
 
+	/**
+	 * Move the blank div accoring to the dragged div's position
+	 * @param  {Event object}
+	 * @return {null}
+	 */
 	var moveBlankDiv = LinkedRock.moveBlankDiv = function(e) {
 		var blocks = document.querySelectorAll("#moveArea-div-child");
 		for (var i = 0; i < blocks.length; i++) {
@@ -94,6 +108,12 @@ var LinkedRock = (function (window, document) {
 		};
 	}
 
+	/**
+	 * Check the way of moving
+	 * @param  {dragged object}
+	 * @param  {event object}
+	 * @return {moving direction}
+	 */
 	var upOrDown = LinkedRock.upOrDown = function(o, e) {
 		var xy = getXY(o);
 		if (e.touches[0].clientY > xy.topSet && e.touches[0].clientY < (xy.topSet + xy.heightSet)) {
@@ -104,7 +124,12 @@ var LinkedRock = (function (window, document) {
 		} else 
 		    return 0; //NO MOVEING
 	}
-
+	
+	/**
+	 * Get the width,top,height of the dragged object
+	 * @param  {event object}
+	 * @return {array}
+	 */
 	var getXY = LinkedRock.getXY = function(e) {
 		var a = new Array();
 	    a.topSet = e.offsetTop; 
