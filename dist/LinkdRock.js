@@ -1,15 +1,15 @@
 /**
- * LinkdRock  1.0.0
+ * LinkedRock  1.0.0
  *
  */
 
 'use strict';
-var LinkdRock = (function (window, document) {
+var LinkedRock = (function (window, document) {
 
 	/**
-	 * LinkdRock Object
+	 * LinkedRock Object
 	 */
-	LinkdRock = function (element, options) {
+	LinkedRock = function (element, options) {
 		this.moveArea = typeof element == "string" ? document.querySelector(element) : element;
 		this.options = options;
 
@@ -35,11 +35,11 @@ var LinkdRock = (function (window, document) {
 	}
 	
 	//版本
-	LinkdRock.version = "1.0.0";
+	LinkedRock.version = "1.0.0";
 
 	var dragObj, newBlank;
 
-	var _touchStart = LinkdRock._touchStart = function(e) {
+	var _touchStart = LinkedRock._touchStart = function(e) {
 		e = e || event;
 		e.preventDefault();
 		dragObj = this;
@@ -56,14 +56,14 @@ var LinkdRock = (function (window, document) {
 		dragObj.parentNode.insertBefore(newBlank, dragObj);
 		return false;
 	}
-	var _touchMove = LinkdRock._touchMove = function(e) {
+	var _touchMove = LinkedRock._touchMove = function(e) {
 		e = e || event;
 		e.preventDefault();
 		if (!dragObj) return false;
 		dragObj.style.top = (e.touches[0].clientY - dragObj.offsetHeight/2) + "px";
 		moveBlankDiv(e);
 	}
-	var _touchEnd = LinkdRock._touchEnd = function(e) {
+	var _touchEnd = LinkedRock._touchEnd = function(e) {
 		e = e || event;
 		if (!dragObj) return false;
 		dragObj.parentNode.insertBefore(dragObj, newBlank);
@@ -75,7 +75,7 @@ var LinkdRock = (function (window, document) {
 		dragObj = {};
 	}
 
-	var moveBlankDiv = LinkdRock.moveBlankDiv = function(e) {
+	var moveBlankDiv = LinkedRock.moveBlankDiv = function(e) {
 		var blocks = document.querySelectorAll("#moveArea-div-child");
 		for (var i = 0; i < blocks.length; i++) {
 			if (blocks[i] == dragObj) continue;
@@ -85,7 +85,7 @@ var LinkdRock = (function (window, document) {
 			else if (moveMark == 1) 
 				blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
 			else {
-				if (blocks[i].nextElementSibLinkdRock == null) 
+				if (blocks[i].nextElementSibLinkedRock == null) 
 					blocks[i].parentNode.appendChild(newBlank);
 				else
 					blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
@@ -94,7 +94,7 @@ var LinkdRock = (function (window, document) {
 		};
 	}
 
-	var upOrDown = LinkdRock.upOrDown = function(o, e) {
+	var upOrDown = LinkedRock.upOrDown = function(o, e) {
 		var xy = getXY(o);
 		if (e.touches[0].clientY > xy.topSet && e.touches[0].clientY < (xy.topSet + xy.heightSet)) {
 		    if (e.touches[0].clientY < (xy.topSet + xy.heightSet / 2))
@@ -105,7 +105,7 @@ var LinkdRock = (function (window, document) {
 		    return 0; //NO MOVEING
 	}
 
-	var getXY = LinkdRock.getXY = function(e) {
+	var getXY = LinkedRock.getXY = function(e) {
 		var a = new Array();
 	    a.topSet = e.offsetTop; 
 	    a.widthSet = e.offsetWidth;
@@ -116,6 +116,6 @@ var LinkdRock = (function (window, document) {
 	    return a;
 	}
 
-	return LinkdRock;
+	return LinkedRock;
 
 })(window, document);
