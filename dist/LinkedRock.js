@@ -85,7 +85,7 @@ var LinkedRock = (function (window, document) {
 			else if (moveMark == 1) 
 				blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
 			else {
-				if (blocks[i].nextElementSibLinkedRock == null) 
+				if (blocks[i].nextElementSibling == null) 
 					blocks[i].parentNode.appendChild(newBlank);
 				else
 					blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
