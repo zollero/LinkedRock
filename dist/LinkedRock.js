@@ -99,10 +99,10 @@ var LinkedRock = (function (window, document) {
 			else if (moveMark == 1) 
 				blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
 			else {
-				if (blocks[i].nextElementSibling == null) 
+				if (blocks.length - 1 === i) 
 					blocks[i].parentNode.appendChild(newBlank);
 				else
-					blocks[i].parentNode.insertBefore(newBlank, blocks[i]);
+					blocks[i].parentNode.insertBefore(newBlank, blocks[i + 1]);
 			}
 			return;
 		};
@@ -116,12 +116,12 @@ var LinkedRock = (function (window, document) {
 	 */
 	var upOrDown = LinkedRock.upOrDown = function(o, e) {
 		var xy = getXY(o);
-		if (e.touches[0].clientY > xy.topSet && e.touches[0].clientY < (xy.topSet + xy.heightSet)) {
-		    if (e.touches[0].clientY < (xy.topSet + xy.heightSet / 2))
-		        return 1; //UP
-		    else
-		        return 2; //DOWN
-		} else 
+		var eClientY = e.touches[0].clientY;
+		if ((eClientY > (xy.topSet + xy.heightSet * 0.5)) && (eClientY < (xy.topSet + xy.heightSet)) 
+		    return 1; //UP
+		else if ((eClientY > xy.topSet) && (eClientY <= (xy.topSet + xy.heightSet * 0.5))) 
+		    return 2; //DOWN	
+		else 
 		    return 0; //NO MOVEING
 	}
 	
