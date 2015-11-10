@@ -40,8 +40,6 @@ var LinkedRock = (function (window, document) {
 		};
 	}
 	
-	//The version
-	// LinkedRock.version = "1.0.0";
 	var dragObj, newBlank;
 
 	LinkedRock.prototype = {
