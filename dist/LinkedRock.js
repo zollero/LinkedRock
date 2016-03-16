@@ -3,10 +3,8 @@
  *
  */
 
-"use strict";
-
-
 var LinkedRock = (function (window, document) {
+	"use strict";
 
 	/**
 	 * @param {DOM element}
